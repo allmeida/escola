@@ -145,9 +145,9 @@ return [
     |
     */
 
-    'sidebar_mini' => 'true',
+    'sidebar_mini' => 'lg',
     'sidebar_collapse' => false,
-    'sidebar_collapse_auto_size' => true,
+    'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
     'sidebar_scrollbar_theme' => 'os-theme-light',
