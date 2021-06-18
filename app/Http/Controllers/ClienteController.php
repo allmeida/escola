@@ -11,41 +11,24 @@ use App\Services\ClienteService;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(ClienteDataTable $clienteDataTable)
     {
         return $clienteDataTable->render('cliente.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $formacao = Formacao::all()->pluck('nome', 'id');
-        return view('cliente.create', compact('cliente'));
+        return view('cliente.create', compact('formacao'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ClienteRequest $request)
     { 
-        $retorno = ClienteService::store($request->all());
-        if ($retorno['status']){
-          return redirect()->route('cliente.index')
-                      ->withSucesso('Cliente salvo com sucesso');
+        $cliente = ClienteService::store($request->all());
+        //dd($request->all());
+        if ($cliente['status']){
+          return redirect()->route('cliente.index');
         }
-
         return back()->withInput()
                 ->withFalha('Ocorreu um erro ao salvar');
         

@@ -30,7 +30,7 @@ class ClienteRequest extends FormRequest
                 return [
                     'nome' => 'required|min:5',
                     'idade' => 'required|integer',
-                    'email' => 'required|unique:content',
+                    'email' => 'required',
                     'cep' => 'required',
                     'logradouro' => 'required',
                     'bairro' => 'required',
@@ -44,7 +44,7 @@ class ClienteRequest extends FormRequest
                 return [
                     'nome' => 'required|min:5',
                     'idade' => 'required|integer',
-                    'email' => 'required|unique:content',
+                    'email' => 'required',
                     'cep' => 'required',
                     'logradouro' => 'required',
                     'bairro' => 'required',

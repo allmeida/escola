@@ -77,7 +77,7 @@
 
                     <div class="form-group">
                         {!! Form::label('formacao_id', 'Formação') !!}
-                        {!! Form::select('formacao_id',$formacao??,null, ['class' => 'form-control']) !!}
+                        {!! Form::select('formacao_id',$formacao ?? null, ['class' => 'form-control']) !!}
                         @error('formacao_id') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 

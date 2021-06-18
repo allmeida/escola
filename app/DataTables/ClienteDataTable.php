@@ -17,12 +17,9 @@ class ClienteDataTable extends DataTable
     {
         return datatables()
         ->eloquent($query)
-        ->editColumn('formacao_id', function($cliente){
-            return Formacao::find($cliente->formacao_id)->nome;
-        })
-        ->addColumn('action', function($id){
+        ->addColumn('action', function($cliente){
             $acoes = link_to(
-                route('cliente.edit', $id),
+                route('cliente.edit', $cliente),
                 'Editar',
                 ['class' => 'btn btn-sm btn-primary']
             );
@@ -30,10 +27,17 @@ class ClienteDataTable extends DataTable
                 'Excluir',
                 [
                     'class' => 'btn btn-sm btn-danger',
-                    'onclick' => "excluir('" .route('cliente.destroy', $id) ."')"
+                    'onclick' => "excluir('" .route('cliente.destroy', $cliente) ."')"
                 ]
             );    
             return $acoes;
+        })
+        
+        ->editColumn('created_at', function ($cliente){
+            return date('d/m/Y', strtotime($cliente->created_at));
+        })
+        ->editColumn('formacao_id', function($cliente){
+            return Formacao::find($cliente->formacao_id)->nome;
         })
         ->editColumn('imagem', function ($cliente) {
             return '<img style="height: 50px;" src="' . asset('imagens/' . $cliente->imagem) . '" />';
@@ -67,11 +71,7 @@ class ClienteDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
+                        Button::make('create')->text('Novo Cliente')
                     );
     }
 
