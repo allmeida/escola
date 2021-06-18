@@ -18,19 +18,23 @@ class ClienteDataTable extends DataTable
         return datatables()
         ->eloquent($query)
         ->addColumn('action', function($cliente){
-            $acoes = link_to(
-                route('cliente.edit', $cliente),
-                'Editar',
-                ['class' => 'btn btn-sm btn-primary']
-            );
-            $acoes .= FormFacade::button(
-                'Excluir',
+            $acoes = [
                 [
-                    'class' => 'btn btn-sm btn-danger',
-                    'onclick' => "excluir('" .route('cliente.destroy', $cliente) ."')"
+                    "titulo" => "Editar",
+                    "icone" => "fas fa-edit",
+                    "route" => route('cliente.edit', $cliente),
+                    "class" => "btn btn-sm btn-primary",
+                    "tipo" => "link"
+                ],
+                [
+                    "titulo" => "Excluir",
+                    "tipo" => "button",
+                    "icone" => "fas fa-trash-alt",
+                    "onclick" => "excluir('" . route('cliente.destroy', $cliente) ."')"
                 ]
-            );    
-            return $acoes;
+            ];
+   
+            return view("datatable.acoes", compact("acoes"));
         })
         
         ->editColumn('created_at', function ($cliente){
@@ -71,8 +75,14 @@ class ClienteDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create')->text('Novo Cliente')
-                    );
+                        Button::make('create')->text('Novo Cliente &nbsp;<i class="fas fa-plus"></i>')
+                        ->addClass("botao-datatable")
+                    )
+                    ->parameters([
+                        'responsive' => true,
+                        'autoWidth' => false,
+                        'language' => ['url' => '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json']
+                    ]);
     }
 
     /**

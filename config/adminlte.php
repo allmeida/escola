@@ -145,9 +145,9 @@ return [
     |
     */
 
-    'sidebar_mini' => 'lg',
+    'sidebar_mini' => 'true',
     'sidebar_collapse' => false,
-    'sidebar_collapse_auto_size' => false,
+    'sidebar_collapse_auto_size' => true,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
     'sidebar_scrollbar_theme' => 'os-theme-light',
@@ -314,7 +314,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => '/vendor/datatables/buttons.server-side.js'
+                    'location' => '/vendor/datatables/buttons.server-side.js',
                 ],
                 [
                     'type' => 'css',
@@ -390,6 +390,17 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//unpkg.com/axios/dist/axios.min.js',
+                ],
+
+            ],
+        ],
+        'Style' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '/css/style.css'
                 ],
 
             ],

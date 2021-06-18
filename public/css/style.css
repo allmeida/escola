@@ -1,0 +1,22 @@
+.bold {
+    font-weight: 1000;
+}
+
+.botao-datatable {
+    background: #0062cc !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: .25rem .5rem !important;
+    border-color: #0062cc !important;
+    font-size: .875rem !important;
+    line-height: 1.5 !important;
+    border-radius: .2rem !important;
+    display: inline-block !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+[hidden] {
+    display: none !important;
+}

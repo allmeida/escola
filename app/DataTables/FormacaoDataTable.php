@@ -12,40 +12,32 @@ use Yajra\DataTables\Services\DataTable;
 
 class FormacaoDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
     public function dataTable($query)
     {
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function($formacao) {
-                $acoes = link_to(
-                    route('formacao.edit' , $formacao),
-                    'Editar',
-                    ['class' => 'btn btn-sm btn-primary']
-                );
-                $acoes .= FormFacade::button(
-                    'Excluir',
+                $acoes = [
                     [
-                        'class' => 'btn btn-sm btn-danger',
-                        'onclick' => "excluir('" .route('formacao.destroy', $formacao) ."')"
+                        "titulo" => "Editar",
+                        "icone" => "fas fa-edit",
+                        "route" => route('formacao.edit', $formacao),
+                        "class" => "btn btn-sm btn-primary",
+                        "tipo" => "link"
+                    ],
+                    [
+                        "titulo" => "Excluir",
+                        "tipo" => "button",
+                        "icone" => "fas fa-trash-alt",
+                        "onclick" => "excluir('" . route('formacao.destroy', $formacao) ."')"
                     ]
-                );
-                return $acoes;
+                ];
+       
+                return view("datatable.acoes", compact("acoes"));
             });
 
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\App\Formacao $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function query(Formacao $model)
     {
         return $model->newQuery();
@@ -65,8 +57,14 @@ class FormacaoDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create')->text('Novo Cliente')
-                    );
+                        Button::make('create')->text('Novo Cliente &nbsp;<i class="fas fa-plus"></i>')
+                        ->addClass("botao-datatable")
+                    )
+                    ->parameters([
+                        'responsive' => true,
+                        'autoWidth' => false,
+                        'language' => ['url' => '//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json']
+                    ]);
     }
 
     /**
