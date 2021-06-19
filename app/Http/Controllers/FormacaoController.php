@@ -10,32 +10,16 @@ use App\Http\Requests\FormacaoRequest;
 
 class FormacaoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(FormacaoDataTable $formacaoDataTable)
     {
         return $formacaoDataTable->render('formacao.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('formacao.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(FormacaoRequest $request)
     {
         $retorno = FormacaoService::store($request->all());
@@ -47,23 +31,11 @@ class FormacaoController extends Controller
         return back()->withInput();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Formacao  $formacao
-     * @return \Illuminate\Http\Response
-     */
     public function show(Formacao $formacao)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Formacao  $formacao
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $retorno = FormacaoService::getFormacaoPorId($id);
@@ -74,13 +46,6 @@ class FormacaoController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Formacao  $formacao
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $retorno = FormacaoService::update($request->all(), $id);
@@ -91,12 +56,6 @@ class FormacaoController extends Controller
         return back()->withInput();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Formacao  $formacao
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $retorno = FormacaoService::destroy($id);

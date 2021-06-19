@@ -44,7 +44,7 @@ class ClienteDataTable extends DataTable
             return Formacao::find($cliente->formacao_id)->nome;
         })
         ->editColumn('imagem', function ($cliente) {
-            return '<img style="height: 50px;" src="' . asset('imagens/' . $cliente->imagem) . '" />';
+            return '<img style="height: 50px;" src="' . asset('/imagens/' . $cliente->imagem) . '" />';
         })
         ->rawColumns(['action', 'imagem']);
         

@@ -57,7 +57,7 @@ class FormacaoDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create')->text('Novo Cliente &nbsp;<i class="fas fa-plus"></i>')
+                        Button::make('create')->text('Nova Formação &nbsp;<i class="fas fa-plus"></i>')
                         ->addClass("botao-datatable")
                     )
                     ->parameters([

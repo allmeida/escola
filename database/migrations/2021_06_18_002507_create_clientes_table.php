@@ -27,8 +27,8 @@ class CreateClientesTable extends Migration
             $table->unsignedBigInteger('formacao_id');
 
             $table->timestamps();
-
-            $table->foreign('formacao_id')->references('id')->on('formacaos');
+            
+            $table->foreign('formacao_id')->references('id')->on('formacaos')->onDelete('cascade');
         });
     }
 
