@@ -67,6 +67,39 @@
 @stop
 
 @section('adminlte_js')
+<script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     @stack('js')
     @yield('js')
+    <script>
+        function excluir(rota) {
+            swal.fire({
+                title: 'Atenção',
+                text: 'Deseja mesmo excluir',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+                    axios.delete(rota)
+                    .then(function (res) {
+                        $('#' + Object.keys(window.LaravelDataTables)[0]).DataTable().ajax.reload();
+                        swal.fire({
+                            icon: 'success',
+                            title: 'Perfeito!',
+                            text: 'Excluido com sucesso'
+                        })
+                    })
+                    .catch(function (err) {
+                        swal.fire({
+                            icon: 'error',
+                            title: 'Ops!',
+                            text: 'Erro ao excluir'
+                        })
+                    });
+                }
+            })
+        }
+    </script>
 @stop
